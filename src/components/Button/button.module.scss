@@ -1,0 +1,22 @@
+.button {
+    &__primary,
+    &__secondary {
+        width: 150px;
+        height: 50px;
+        border-radius: 4px;
+        font-family: "Montserrat";
+        font-size: 20px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    &__primary {
+        background-color: #F65261;
+        color: aliceblue;
+    }
+
+    &__secondary {
+        background-color: #232323;
+        color: #F65261;
+    }
+}
