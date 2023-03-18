@@ -1,9 +1,9 @@
 import styles from './counter.module.scss'
 import React from 'react'
 
-export default function Counter(props) {
+export default function Counter({initialValue}) {
 
-    const [value , setValue] = React.useState(0);
+    const [value , setValue] = React.useState(initialValue);
 
     return (
         React.createElement('div', { className: styles.container },
