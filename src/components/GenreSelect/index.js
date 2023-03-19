@@ -1,5 +1,8 @@
-import styles from './genreselect.module.scss';
+// import packages
 import React from 'react';
+
+//import styling
+import styles from './genreselect.module.scss';
 
 export default function GenreSelect({genres , selectedGenre , onSelect}) {
     const [genre , setGenre] = React.useState(selectedGenre || 'ALL');

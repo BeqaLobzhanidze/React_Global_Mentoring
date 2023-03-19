@@ -1,6 +1,11 @@
-import Button from '../Button';
-import styles from './searchform.module.scss';
+// import packages
 import React from 'react';
+
+// import components
+import Button from '../Button';
+
+// import styling
+import styles from './searchform.module.scss';
 
 export default function SearchForm({initialSearchQuery , onSearch}) {
 

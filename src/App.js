@@ -12,7 +12,7 @@ import { Genres } from './utils/constants';
 function App() {
   return (
     <div className="App">
-      <Counter initialValue={5}/>
+      <Counter initialValue={10}/>
       <SearchForm initialSearchQuery='text' onSearch={(data) => console.log(data)}/>
       <GenreSelect genres={Genres} selectedGenre='ALL' onSelect={genre => console.log(genre)}/>
     </div>

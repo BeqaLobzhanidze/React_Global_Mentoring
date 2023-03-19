@@ -1,3 +1,4 @@
+// import styling
 import styles from './button.module.scss';
 
 export default function Button({btnClass, text , ...props}) {
