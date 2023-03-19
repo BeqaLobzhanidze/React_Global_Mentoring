@@ -1,0 +1,25 @@
+.container {
+    background-color: #232323;
+    margin: 0 auto;
+    width: 450px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__list {
+        display: flex;
+
+        li {
+            color: aliceblue;
+            list-style: none;
+            margin: 0 10px;
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+
+        &__active {
+            border-bottom: 2px solid red;
+        }
+    }
+}
