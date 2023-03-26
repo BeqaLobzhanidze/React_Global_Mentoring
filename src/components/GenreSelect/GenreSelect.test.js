@@ -23,7 +23,7 @@ describe('GenreSelect Component Related Test Cases :', () => {
         const targetValue = 'DOCUMENTARY';
         const onSelectMock = jest.fn();
         render(<GenreSelect genres={Genres} selectedGenre={genreValue} onSelect={onSelectMock}/>)
-        fireEvent.click(screen.getByText(/documentary/i) , {target: {value: targetValue}})
+        fireEvent.click(screen.getByText(/documentary/i))
         expect(onSelectMock).toHaveBeenCalledWith(targetValue)
     })
 })
