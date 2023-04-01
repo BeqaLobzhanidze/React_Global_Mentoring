@@ -8,13 +8,16 @@ import './App.css';
 
 // import utils
 import { Genres } from './utils/constants';
+import React from 'react';
 
 function App() {
+  const [query , setQuery] = React.useState('')
   return (
     <div className="App">
       <Counter initialValue={10}/>
-      <SearchForm initialSearchQuery='text' onSearch={(data) => console.log(data)}/>
+      <SearchForm initialSearchQuery='' onSearch={data => setQuery(data)}/>
       <GenreSelect genres={Genres} selectedGenre='ALL' onSelect={genre => console.log(genre)}/>
+      <h5 id="forTesting">{query}</h5>
     </div>
   );
 }
