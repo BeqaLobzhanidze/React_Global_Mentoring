@@ -11,6 +11,7 @@ import { Genres } from './utils/constants';
 import React from 'react';
 import MovieTile from './components/MovieTile';
 import MovieDetails from './components/MovieDetails';
+import SortControl from './components/SortControl';
 
 const MovieINFO = {
   imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
@@ -42,7 +43,10 @@ function App() {
     <div className="App">
       <Counter initialValue={10}/>
       <SearchForm initialSearchQuery='' onSearch={data => setQuery(data)}/>
-      <GenreSelect genres={Genres} selectedGenre='ALL' onSelect={genre => console.log(genre)}/>
+      <div className='search'>
+        <GenreSelect genres={Genres} selectedGenre='ALL' onSelect={genre => console.log(genre)}/>
+        <SortControl currentSelectProps='TITLE' onSortBy={(data) => console.log(data)}/>
+      </div>
       <h5 id="forTesting">{query}</h5>
       {openDetails && <MovieDetails movieDetailInfo={MovieDetailINFO}/>}
       <MovieTile movieInfo={MovieINFO} callback={() => setOpenDetails(prev => !prev)}/>

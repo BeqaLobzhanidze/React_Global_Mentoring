@@ -1,0 +1,36 @@
+.container {
+    background-color: #232323;
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    p {
+        display: inline-block;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.888889px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        opacity: 0.6;
+        display: flex;
+        align-items: center;
+    }
+    select {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        outline:0px;
+        letter-spacing: 0.888889px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        background-color: #232323;
+        border: none;
+        cursor: pointer;
+        width: 150px;
+    }
+}
