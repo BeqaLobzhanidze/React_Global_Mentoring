@@ -28,17 +28,17 @@ export default function MovieTile({movieInfo , callback}) {
             <figure className={styles.container__figure}>
                 <img src={imgURL} alt="movieTile" />
                 <figcaption className={styles.container__figure__figcaption}>
-                    <div>
+                    <div className={styles.container__figure__figcaption__main}>
                         <span>{movieName}</span>
                         <span>{releaseYear}</span>
                     </div>
-                    <p>
+                    <div className={styles.container__figure__figcaption__genres}>
                         {genres.map((item , i , list) =>
                             <React.Fragment key={item}>
                                 {i + 1 !== list.length ? <span>{item}{separator}</span> : <span>{item}</span>}
                             </React.Fragment>
                         )}
-                    </p>
+                    </div>
                 </figcaption>
             </figure>
         </section>

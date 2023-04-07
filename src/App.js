@@ -13,13 +13,52 @@ import MovieTile from './components/MovieTile';
 import MovieDetails from './components/MovieDetails';
 import SortControl from './components/SortControl';
 import HeaderSearch from './components/HeaderSearch';
+import MovieCard from './components/MovieCard';
 
-const MovieINFO = {
-  imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
-  movieName: 'Avengers',
-  releaseYear: 2010,
-  genres: ['horror' , 'adventure' , 'comedy']
-}
+const MovieINFO = [
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  },
+  {
+    imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+    movieName: 'Avengers',
+    releaseYear: 2010,
+    genres: ['horror' , 'adventure' , 'comedy']
+  }
+]
 
 const MovieDetailINFO = {
   imgURL: 'https://image.tmdb.org/t/p/w780/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
@@ -50,7 +89,7 @@ function App() {
       </div>
       <h5 id="forTesting">{query}</h5>
       {openDetails && <MovieDetails movieDetailInfo={MovieDetailINFO}/>}
-      <MovieTile movieInfo={MovieINFO} callback={() => setOpenDetails(prev => !prev)}/>
+      <MovieCard movieInfo={MovieINFO} setOpenDetails={setOpenDetails}/>
     </div>
   );
 }

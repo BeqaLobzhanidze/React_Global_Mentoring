@@ -2,7 +2,6 @@
     width: 300px;
     height: 410px;
     background-color: #232323;
-    margin: 50px auto;
     cursor: pointer;
     position: relative;
     &__options {
@@ -28,7 +27,7 @@
         }
         &__figcaption {
             padding: 10px 0;
-            div {
+            &__main {
                 display: flex;
                 justify-content: space-between;
                 span {
@@ -43,8 +42,8 @@
                     font-size: 14px;
                 }
             }
-            p {
-                font-size: 14px;
+            &__genres {
+                font-size: 18px;
                 font-weight: 500;
                 color: aliceblue;
                 font-family: Montserrat;
