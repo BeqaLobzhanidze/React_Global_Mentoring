@@ -11,7 +11,7 @@ export default function SortControl({currentSelectProps , onSortBy}) {
     return (
         <div className={styles.container}>
             <p>Sort By</p>
-            <select value={currentSelect} onChange={(e) => selectSortBy(e)}>
+            <select data-testid='select' value={currentSelect} onChange={(e) => selectSortBy(e)}>
                 <option>RELEASE DATE</option>
                 <option>TITLE</option>
             </select>
