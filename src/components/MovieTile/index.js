@@ -20,7 +20,7 @@ export default function MovieTile({movieInfo , callback}) {
      }
 
     return (
-        <section aria-label='movieTile' className={styles.container} onClick={callback}>
+        <section aria-label='movieTile' className={styles.container} >
             <div className={styles.container__icon} onClick={e => toggleOptionsWithPropagation(e)}>
                 <BsThreeDotsVertical />
             </div>
@@ -28,7 +28,7 @@ export default function MovieTile({movieInfo , callback}) {
             <figure className={styles.container__figure}>
                 <img src={imgURL} alt="movieTile" />
                 <figcaption className={styles.container__figure__figcaption}>
-                    <div className={styles.container__figure__figcaption__main}>
+                    <div className={styles.container__figure__figcaption__main} onClick={callback}>
                         <span>{movieName}</span>
                         <span>{releaseYear}</span>
                     </div>
