@@ -22,7 +22,7 @@ export default function HeaderSearch({setQuery}) {
                 <SearchForm initialSearchQuery='asdad' onSearch={data => setQuery(data)}/>
             </div>
             <Dialog title='add movie' isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <MovieForm />
+                <MovieForm callback={data=> console.log(data)} onClose={() => setIsOpen(false)}/>
             </Dialog>
         </div>
     )

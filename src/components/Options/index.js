@@ -35,7 +35,7 @@ export default function Options({toggleOptionsWithPropagation}) {
             </div>
             {console.log(isOpen)}
             <Dialog title='edit movie' isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <MovieForm movieInfo={constants.MovieDetailINFO}/>
+                <MovieForm movieInfo={constants.MovieDetailINFO} callback={data=> console.log(data)} onClose={() => setIsOpen(false)}/>
             </Dialog>
             <Dialog title='delete movie' isOpen={isOpenDelete} onClose={() => setIsOpenDelete(false)}>
                 <DeleteBlock />

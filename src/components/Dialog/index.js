@@ -13,7 +13,7 @@ const Dialog = ({title, isOpen, children , onClose}) => {
         <div className={styles.container}>
             <div className={styles.container__dialog}>
               <h2>{title}</h2>
-              <div className={styles.container__dialog__close} onClick={onClose}>
+              <div data-testid='closeModal' className={styles.container__dialog__close} onClick={onClose}>
                 <AiFillCloseCircle color='white' size={30}/>
               </div>
               {children}
