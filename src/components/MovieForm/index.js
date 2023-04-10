@@ -10,7 +10,19 @@ const options = [
     { value: 'Comedy', label: 'Comedy' }
   ]
 
+const initialValue = {
+    imgURL: '',
+    movieName: '',
+    releaseYear: '',
+    genres: [],
+    rating: '',
+    duration: '',
+    description: ``
+  }
+
 export default function MovieForm({movieInfo , callback , onClose}) {
+
+    const [formValues , setFormValues] = React.useState(movieInfo || initialValue)
 
     const [multiSelectValue , setMultiSelectValue] = React.useState('');
 
@@ -20,42 +32,89 @@ export default function MovieForm({movieInfo , callback , onClose}) {
         onClose();
     }
 
+    function multiSelectChange(option) {
+        setMultiSelectValue(option);
+    }
+
     return (
         <form className={styles.container} data-testid='form' onSubmit={submitHandler}>
             <div className={styles.container__main}>
                 <aside className={styles.container__main__leftSide}>
                     <div>
                         <label htmlFor='title'>TITLE</label>
-                        <input type='text' id='title' name='title' value={movieInfo && movieInfo.movieName}/>
+                        <input
+                                type='text'
+                                id='title'
+                                name='title'
+                                value={formValues.movieName}
+                                onChange={ e => setFormValues({...formValues , movieName : e.target.value}) }
+                            />
                     </div>
                     <div>
                         <label htmlFor='url'>MOVIE URL</label>
-                        <input type='url' id='url' name='url' placeholder='htpps://' value={movieInfo && movieInfo.imgURL}/>
+                        <input
+                                type='url'
+                                id='url'
+                                name='url'
+                                placeholder='htpps://'
+                                value={formValues.imgURL}
+                                onChange={ e => setFormValues({...formValues , imgURL : e.target.value}) }
+                            />
                     </div>
                     <div>
                         <label htmlFor='genre'>Genre</label>
-                        <input style={{'display': 'none'}} value={multiSelectValue}/>
-                        <Select name='genre' isMulti options={options} className={styles.container__main__leftSide__customSelect} />
+                        <input style={{'display' : 'none'}} name='genre' value={JSON.stringify(multiSelectValue)} onChange={()=> {}}/>
+                        <Select
+                                isMulti
+                                options={options}
+                                className={styles.container__main__leftSide__customSelect} 
+                                onChange={multiSelectChange}
+                            />
                     </div>
                 </aside>
                 <aside className={styles.container__main__rightSide}>
                     <div>
                         <label htmlFor='date'>RELEASE DATE</label>
-                        <input type='date' id='date' name='date' value={movieInfo && movieInfo.releaseYear + "-01-01"}/>
+                        <input
+                                type='date'
+                                id='date'
+                                name='date'
+                                value={formValues.releaseYear}
+                                onChange={ e => setFormValues({...formValues , releaseYear : e.target.value}) }
+                            />
                     </div>
                     <div>
                         <label htmlFor='rating'>RATING</label>
-                        <input type='number' id='rating' name='rating' value={movieInfo && movieInfo.rating}/>
+                        <input
+                                type='number'
+                                id='rating'
+                                name='rating'
+                                value={formValues.rating}
+                                onChange={ e => setFormValues({...formValues , rating : e.target.value}) }
+                            />
                     </div>
                     <div>
                         <label htmlFor='runtime'>RUNTIME</label>
-                        <input type='text' id='runtime' name='runtime' placeholder='runtime' value={movieInfo && movieInfo.duration}/>
+                        <input
+                                type='text'
+                                id='runtime'
+                                name='runtime'
+                                placeholder='runtime'
+                                value={formValues.duration}
+                                onChange={ e => setFormValues({...formValues , duration : e.target.value}) }
+                            />
                     </div>
                 </aside>
             </div>
             <div className={styles.container__overview}>
                 <label htmlFor='description'>OVERVIEW</label>
-                <textarea id='description' placeholder='Movie Description' name='description' value={movieInfo && movieInfo.description}/>
+                <textarea
+                        id='description'
+                        placeholder='Movie Description'
+                        name='description'
+                        value={formValues.description}
+                        onChange={ e => setFormValues({...formValues , description : e.target.value}) }
+                    />
             </div>
             <div className={styles.container__buttons}>
                 <Button btnClass='secondary' text='RESET'/>
