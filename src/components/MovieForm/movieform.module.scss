@@ -55,6 +55,12 @@
 
         &__leftSide {
             width: 50%;
+
+            &__customSelect div {
+                background: rgba(50, 50, 50, 0.948044);
+                color: white;
+                cursor: pointer;
+            }
         }
     }
     &__overview {

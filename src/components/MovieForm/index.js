@@ -1,12 +1,23 @@
 import Button from '../Button';
 import styles from './movieform.module.scss';
+import Select from 'react-select';
+import React from 'react';
+
+const options = [
+    { value: 'Crime', label: 'Crime' },
+    { value: 'Documentary', label: 'Documentary' },
+    { value: 'Horror', label: 'Horror' },
+    { value: 'Comedy', label: 'Comedy' }
+  ]
 
 export default function MovieForm({movieInfo , callback , onClose}) {
+
+    const [multiSelectValue , setMultiSelectValue] = React.useState('');
 
     function submitHandler(e) {
         e.preventDefault();
         callback(Object.fromEntries(new FormData(e.target)));
-        onClose()
+        onClose();
     }
 
     return (
@@ -23,13 +34,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                     </div>
                     <div>
                         <label htmlFor='genre'>Genre</label>
-                        <select id='genre' name='genre'>
-                            <option>option1</option>
-                            <option>option1</option>
-                            <option>option1</option>
-                            <option>option1</option>
-                            <option>option1</option>
-                        </select>
+                        <input style={{'display': 'none'}} value={multiSelectValue}/>
+                        <Select name='genre' isMulti options={options} className={styles.container__main__leftSide__customSelect} />
                     </div>
                 </aside>
                 <aside className={styles.container__main__rightSide}>
