@@ -1,21 +1,21 @@
 import styles from './moviedetails.module.scss';
 import React from 'react';
-import SeparatorBetweenGenres from '../MovieTile/utills/separator';
+import { SeparatorBetweenGenres , Duration } from '../MovieTile/utills/separator';
 
 export default function MovieDetails({ movieDetailInfo }) {
 
-    const {imgURL , movieName , releaseYear , genres , rating , duration , description} = movieDetailInfo;
+    const {poster_path , title , release_date , genres , vote_average , runtime , overview} = movieDetailInfo;
     const separator = SeparatorBetweenGenres(genres);
 
     return (
         <section className={styles.container} aria-label='movie description'>
             <figure>
-                <img src={imgURL} alt="movieTile"/>
+                <img src={poster_path} alt="movieTile"/>
             </figure>
             <div className={styles.container__rightSide}>
                 <div className={styles.container__rightSide__title}>
-                    <h2>{movieName}</h2>
-                    <span>{rating}</span>
+                    <h2>{title}</h2>
+                    <span>{vote_average}</span>
                 </div>
                 <p className={styles.container__rightSide__genres}>
                     {genres.map((item , i , list) =>
@@ -25,10 +25,10 @@ export default function MovieDetails({ movieDetailInfo }) {
                     )}
                 </p>
                 <div className={styles.container__rightSide__overallinfo}>
-                    <span>{releaseYear}</span>
-                    <span>{duration}</span>
+                    <span>{release_date.substring(0,4)}</span>
+                    <span>{Duration(runtime)}</span>
                 </div>
-                <p className={styles.container__rightSide__description}>{description}</p>
+                <p className={styles.container__rightSide__description}>{overview}</p>
             </div>
         </section>
     )

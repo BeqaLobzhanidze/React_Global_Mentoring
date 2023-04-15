@@ -12,6 +12,7 @@ import SortControl from './components/SortControl';
 import HeaderSearch from './components/HeaderSearch';
 import MovieCard from './components/MovieCard';
 import constants from './utils/constants';
+import MovieListPage from './components/MovieListPage';
 
 function App() {
   const [query , setQuery] = React.useState('')
@@ -19,14 +20,15 @@ function App() {
   return (
     <div className="App">
       <Counter initialValue={10}/>
-      <HeaderSearch setQuery={setQuery}/>
-      <div className='search'>
+      {/* <HeaderSearch setQuery={setQuery}/> */}
+      {/* <div className='search'>
         <GenreSelect genres={constants.Genres} selectedGenre='ALL' onSelect={genre => console.log(genre)}/>
         <SortControl currentSelectProps='TITLE' onSortBy={(data) => console.log(data)}/>
-      </div>
-      <h5 id="forTesting">{query}</h5>
+      </div> */}
+      {/* <h5 id="forTesting">{query}</h5> */}
       {openDetails && <MovieDetails movieDetailInfo={constants.MovieDetailINFO}/>}
-      <MovieCard movieInfo={constants.MovieINFO} setOpenDetails={setOpenDetails}/>
+      {/* <MovieCard movieInfo={constants.MovieINFO} setOpenDetails={setOpenDetails}/> */}
+      <MovieListPage />
     </div>
   );
 }

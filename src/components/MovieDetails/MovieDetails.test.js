@@ -7,10 +7,10 @@ describe('MovieDetails Component related test cases' , function() {
         render(<MovieDetails movieDetailInfo={constants.MovieDetailINFO}/>)
         const image = screen.getByAltText('movieTile');
         const src = image.getAttribute('src');
-        expect(constants.MovieDetailINFO.imgURL).toEqual(src);
-        expect(screen.getByText(constants.MovieDetailINFO.movieName)).toBeInTheDocument();
-        expect(screen.getByText(constants.MovieDetailINFO.releaseYear)).toBeInTheDocument();
-        expect(screen.getByText(constants.MovieDetailINFO.duration)).toBeInTheDocument();
+        expect(constants.MovieDetailINFO.poster_path).toEqual(src);
+        expect(screen.getByText(constants.MovieDetailINFO.title)).toBeInTheDocument();
+        expect(screen.getByText(constants.MovieDetailINFO.release_date)).toBeInTheDocument();
+        expect(screen.getByText(constants.MovieDetailINFO.runtime)).toBeInTheDocument();
         expect(screen.getByText(constants.MovieDetailINFO.genres[2])).toBeInTheDocument();
     })
 })
