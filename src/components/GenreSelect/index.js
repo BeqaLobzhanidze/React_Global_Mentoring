@@ -8,7 +8,7 @@ import styles from './genreselect.module.scss';
 export default function GenreSelect({genres , selectedGenre , onSelect}) {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [genre , setGenre] = React.useState(searchParams.get('genre') || selectedGenre || 'ALL');
+    const [genre , setGenre] = React.useState(searchParams.get('genre')?.toUpperCase() || selectedGenre || 'ALL');
 
     function genreHandleClick(option) {
         onSelect(option.name);

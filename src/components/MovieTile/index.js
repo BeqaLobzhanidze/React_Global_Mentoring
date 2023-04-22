@@ -1,6 +1,7 @@
 // import packages
 import React from 'react';
 import {BsThreeDotsVertical} from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
 // import styling
 import styles from './movietile.module.scss';
@@ -10,9 +11,9 @@ import { SeparatorBetweenGenres } from './utills/separator';
 import Options from '../Options';
 import Poster from '../Poster';
 
-export default function MovieTile({movieInfo , callback}) {
+export default function MovieTile({movieInfo}) {
     const [showOptions , setShowOptions] = React.useState(false);
-    const {poster_path , title , release_date , genres} = movieInfo;
+    const {poster_path , title , release_date , genres , id} = movieInfo;
     const separator = SeparatorBetweenGenres(genres);
 
      function toggleOptionsWithPropagation(e) {
@@ -29,8 +30,10 @@ export default function MovieTile({movieInfo , callback}) {
             <figure className={styles.container__figure}>
                 <Poster src={poster_path}/>
                 <figcaption className={styles.container__figure__figcaption}>
-                    <div className={styles.container__figure__figcaption__main} onClick={callback}>
-                        <span>{title}</span>
+                    <div className={styles.container__figure__figcaption__main}>
+                        <Link to={`/${id}`}>
+                            <span>{title}</span>
+                        </Link>
                         <span>{release_date.substring(0, 4)}</span>
                     </div>
                     <div className={styles.container__figure__figcaption__genres}>

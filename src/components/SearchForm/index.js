@@ -11,11 +11,11 @@ import styles from './searchform.module.scss';
 export default function SearchForm({initialSearchQuery , onSearch}) {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [searchQuery , setSearchQuery] = React.useState( searchParams.get('searchQuery') || initialSearchQuery || '');
+    const [searchQuery , setSearchQuery] = React.useState( searchParams.get('query') || initialSearchQuery || '');
 
     function setUrl() {
         const existingParams = Object.fromEntries(searchParams.entries());
-        const newParams = { searchQuery: searchQuery };
+        const newParams = { query: searchQuery };
         const mergedParams = { ...existingParams, ...newParams };
         setSearchParams(new URLSearchParams(mergedParams));
     }

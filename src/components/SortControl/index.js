@@ -7,13 +7,13 @@ import { useSearchParams } from 'react-router-dom';
 export default function SortControl({currentSelectProps , onSortBy}) {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [currentSelect , setCurrentSelect] = React.useState(searchParams.get('sortCriterion') || currentSelectProps || 'RELEASE DATE');
+    const [currentSelect , setCurrentSelect] = React.useState(searchParams.get('sortBy')?.toUpperCase() || currentSelectProps || 'RELEASE DATE');
 
     function selectSortBy(e) {
         setCurrentSelect(e.target.value);
         onSortBy(getSortControlValue(e.target.value));
         const existingParams = Object.fromEntries(searchParams.entries());
-        const newParams = { sortCriterion: getSortControlValue(e.target.value) };
+        const newParams = { sortBy: getSortControlValue(e.target.value) };
         const mergedParams = { ...existingParams, ...newParams };
         setSearchParams(new URLSearchParams(mergedParams));
     }
