@@ -1,10 +1,17 @@
+// import components
 import Button from "../Button";
 import SearchForm from "../SearchForm";
-import styles from './headersearch.module.scss';
-import netflix from '../../assets/netflixroulette copy.png';
 import Dialog from "../Dialog";
-import React from "react";
 import MovieForm from "../MovieForm";
+
+//import styling
+import styles from './headersearch.module.scss';
+
+//import assets
+import netflix from '../../assets/netflixroulette copy.png';
+
+//import packages
+import React from "react";
 
 export default function HeaderSearch({setQuery}) {
     const [isOpen , setIsOpen] = React.useState(false)
