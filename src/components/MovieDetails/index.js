@@ -4,7 +4,7 @@ import styles from './moviedetails.module.scss';
 // import packages
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { useParams , Link } from 'react-router-dom';
+import { useParams , Link , useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 //import assets and utils
@@ -17,6 +17,7 @@ export default function MovieDetails() {
     const { movieID } = useParams();
     const [movieDetailInfo , setMovieDetailInfo] = React.useState(null);
     const separator = movieDetailInfo && SeparatorBetweenGenres(movieDetailInfo.genres);
+    const location = useLocation();
     
     React.useEffect(() => {
         axios.get(`http://localhost:4000/movies/${movieID}`).then(data => setMovieDetailInfo(data.data))
@@ -30,7 +31,10 @@ export default function MovieDetails() {
                     <img src={netflix} alt='netflix'/>
                 </figure>
                 <div>
-                    <Link to="/">
+                    <Link to={{
+                        pathname: `/`,
+                        search: location.search
+                    }}>
                         <BsSearch size={25} color='white'/>
                     </Link>
                 </div>
