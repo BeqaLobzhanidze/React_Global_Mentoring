@@ -7,6 +7,7 @@ import HeaderSearch from "../HeaderSearch";
 
 //import packages
 import { useState , useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 //import utills
@@ -14,9 +15,10 @@ import constants from "../../utils/constants";
 
 export default function MovieListPage() {
 
-    const [searchQuery , setSearchQuery] = useState('');
-    const [sortCriterion , setSortCriterion] = useState('');
-    const [activeGenre , setActiveGenre] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchQuery , setSearchQuery] = useState(searchParams.get("searchQuery") || "");
+    const [sortCriterion , setSortCriterion] = useState(searchParams.get("sortCriterion") || "");
+    const [activeGenre , setActiveGenre] = useState(searchParams.get("genre") || "");
     const [movieList , setMovieList] = useState('');
     const [selectedMovie , setSelectedMovie] = useState(null);
 
@@ -29,7 +31,7 @@ export default function MovieListPage() {
         <>
             {selectedMovie ? <MovieDetails movieDetailInfo={selectedMovie} setSelectedMovie={setSelectedMovie}/> : <HeaderSearch setQuery={setSearchQuery}/>}
             <div className='search'>
-                <GenreSelect genres={constants.Genres} selectedGenre='ALL' onSelect={setActiveGenre}/>
+                <GenreSelect genres={constants.Genres} selectedGenre='ALL' onSelect={setActiveGenre} />
                 <SortControl currentSelectProps='TITLE' onSortBy={setSortCriterion}/>
             </div>
             <MovieCard movieInfo={movieList} setSelectedMovie={setSelectedMovie}/>

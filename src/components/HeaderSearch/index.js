@@ -26,7 +26,7 @@ export default function HeaderSearch({setQuery}) {
             </div>
             <div className={styles.container__body}>
                 <h1 className={styles.container__body__title}>FIND YOUR MOVIE</h1>
-                <SearchForm initialSearchQuery='asdad' onSearch={data => setQuery(data)}/>
+                <SearchForm initialSearchQuery="test" onSearch={data => setQuery(data)}/>
             </div>
             <Dialog title='add movie' isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <MovieForm callback={data=> console.log(data)} onClose={() => setIsOpen(false)}/>
