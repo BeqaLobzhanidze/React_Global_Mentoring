@@ -21,10 +21,9 @@ export default function MovieListPage() {
     const [selectedMovie , setSelectedMovie] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/movies').then(data => setMovieList(data.data.data));
-    }, [])
-
-    console.log(sortCriterion);
+        const genre = activeGenre === "ALL" ? "" : activeGenre;
+        axios.get(`http://localhost:4000/movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&sortOrder='asc'&filter=${genre}`).then(data => setMovieList(data.data.data));
+    }, [searchQuery , sortCriterion , activeGenre])
 
     return (
         <>

@@ -8,6 +8,7 @@ import styles from './movietile.module.scss';
 //import utills & components
 import { SeparatorBetweenGenres } from './utills/separator';
 import Options from '../Options';
+import Poster from '../Poster';
 
 export default function MovieTile({movieInfo , callback}) {
     const [showOptions , setShowOptions] = React.useState(false);
@@ -26,7 +27,7 @@ export default function MovieTile({movieInfo , callback}) {
             </div>
             {showOptions && <div className={styles.container__options}><Options toggleOptionsWithPropagation={toggleOptionsWithPropagation}/></div>}
             <figure className={styles.container__figure}>
-                <img src={poster_path} alt="movieTile" />
+                <Poster src={poster_path}/>
                 <figcaption className={styles.container__figure__figcaption}>
                     <div className={styles.container__figure__figcaption__main} onClick={callback}>
                         <span>{title}</span>

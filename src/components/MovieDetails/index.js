@@ -8,6 +8,7 @@ import { BsSearch } from 'react-icons/bs';
 //import assets and utils
 import { SeparatorBetweenGenres , Duration } from '../MovieTile/utills/separator';
 import netflix from '../../assets/netflixroulette copy.png';
+import Poster from '../Poster';
 
 export default function MovieDetails({ movieDetailInfo ,setSelectedMovie }) {
 
@@ -26,7 +27,7 @@ export default function MovieDetails({ movieDetailInfo ,setSelectedMovie }) {
                 </div>
                 <div className={styles.container__details}>
                     <figure>
-                        <img src={poster_path} alt="movieTile"/>
+                        <Poster src={poster_path}/>
                     </figure>
                     <div className={styles.container__details__rightSide}>
                         <div className={styles.container__details__rightSide__title}>

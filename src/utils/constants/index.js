@@ -17,7 +17,7 @@ const Genres = [
     },
     {
       id:5,
-      name: 'GAME'
+      name: 'ANIMATION'
     }
   ]
 
@@ -82,4 +82,17 @@ const MovieDetailINFO = {
   tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,`
 }
 
-export default { Genres , MovieDetailINFO , MovieINFO }
+const sortCriterion = [
+  {
+    id:0,
+    value: "release_date",
+    name: "RELEASE DATE"
+  },
+  {
+    id:1,
+    value:"title",
+    name: "TITLE"
+  }
+]
+
+export default { Genres , MovieDetailINFO , MovieINFO , sortCriterion }
