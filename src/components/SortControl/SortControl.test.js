@@ -6,6 +6,6 @@ describe('SortControl Component related test cases' , function() {
         const SortByMock = jest.fn();
         render(<SortControl currentSelectProps='TITLE' onSortBy={SortByMock}/>)
         fireEvent.change(screen.getByTestId('select' , {target : {value: 'TITLE'}}));
-        expect(SortByMock).toHaveBeenCalledWith('TITLE');
+        expect(SortByMock).toHaveBeenCalledWith('title');
     })
 })
