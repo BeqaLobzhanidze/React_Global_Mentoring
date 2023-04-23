@@ -13,7 +13,6 @@ import HeaderSearch from './components/HeaderSearch';
 import MovieCard from './components/MovieCard';
 import constants from './utils/constants';
 
-
 function App() {
   const [query , setQuery] = React.useState('')
   const [openDetails , setOpenDetails] = React.useState(false);
