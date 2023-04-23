@@ -6,12 +6,13 @@ import {BsThreeDotsVertical} from 'react-icons/bs'
 import styles from './movietile.module.scss';
 
 //import utills & components
-import SeparatorBetweenGenres from './utills/separator';
+import { SeparatorBetweenGenres } from './utills/separator';
 import Options from '../Options';
+import Poster from '../Poster';
 
 export default function MovieTile({movieInfo , callback}) {
     const [showOptions , setShowOptions] = React.useState(false);
-    const {imgURL , movieName , releaseYear , genres} = movieInfo;
+    const {poster_path , title , release_date , genres} = movieInfo;
     const separator = SeparatorBetweenGenres(genres);
 
      function toggleOptionsWithPropagation(e) {
@@ -20,17 +21,17 @@ export default function MovieTile({movieInfo , callback}) {
      }
 
     return (
-        <section aria-label='movieTile' className={styles.container} >
+        <section aria-label='movieTile' className={styles.container} data-testid="movie" >
             <div className={styles.container__icon} onClick={e => toggleOptionsWithPropagation(e)}>
                 <BsThreeDotsVertical />
             </div>
             {showOptions && <div className={styles.container__options}><Options toggleOptionsWithPropagation={toggleOptionsWithPropagation}/></div>}
             <figure className={styles.container__figure}>
-                <img src={imgURL} alt="movieTile" />
+                <Poster src={poster_path}/>
                 <figcaption className={styles.container__figure__figcaption}>
                     <div className={styles.container__figure__figcaption__main} onClick={callback}>
-                        <span>{movieName}</span>
-                        <span>{releaseYear}</span>
+                        <span>{title}</span>
+                        <span data-testid="release-date">{release_date.substring(0, 4)}</span>
                     </div>
                     <div className={styles.container__figure__figcaption__genres}>
                         {genres.map((item , i , list) =>

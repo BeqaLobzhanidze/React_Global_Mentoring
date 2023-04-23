@@ -29,7 +29,7 @@ export default function SearchForm({initialSearchQuery , onSearch}) {
                     onFocus={() => onSearch(searchQuery)}
                 />
             </div>
-            <Button btnClass='primary' text='Search' onClick={() => onSearch(searchQuery)}/>
+            <Button btnClass='primary' data-testid='searchForm' text='Search' onClick={() => onSearch(searchQuery)}/>
         </div>
     )
 }
