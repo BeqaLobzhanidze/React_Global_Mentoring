@@ -21,7 +21,7 @@ export default function MovieTile({movieInfo , callback}) {
      }
 
     return (
-        <section aria-label='movieTile' className={styles.container} >
+        <section aria-label='movieTile' className={styles.container} data-testid="movie" >
             <div className={styles.container__icon} onClick={e => toggleOptionsWithPropagation(e)}>
                 <BsThreeDotsVertical />
             </div>
@@ -31,7 +31,7 @@ export default function MovieTile({movieInfo , callback}) {
                 <figcaption className={styles.container__figure__figcaption}>
                     <div className={styles.container__figure__figcaption__main} onClick={callback}>
                         <span>{title}</span>
-                        <span>{release_date.substring(0, 4)}</span>
+                        <span data-testid="release-date">{release_date.substring(0, 4)}</span>
                     </div>
                     <div className={styles.container__figure__figcaption__genres}>
                         {genres.map((item , i , list) =>
