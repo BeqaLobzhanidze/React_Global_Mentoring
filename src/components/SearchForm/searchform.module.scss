@@ -1,14 +1,13 @@
 .container {
     color: aliceblue;
     display: flex;
-    justify-content: center;
 
     &__searchinput {
         margin-right: 14px;
     }
 
     &__searchinput input {
-        width: 715px;
+        width: 800px;
         height: 50px;
         background-color: rgba(16, 2, 2, 0.8);
         border-radius: 4px;
