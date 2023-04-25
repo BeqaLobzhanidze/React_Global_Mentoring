@@ -24,7 +24,8 @@ export default function GenreSelect({genres , selectedGenre , onSelect}) {
                 {genres.map(option => (
                    <li
                         key={option.id} 
-                        className={`${genre === option.name && styles.container__list__active}`} 
+                        className={`${genre === option.name && styles.container__list__active}`}
+                        data-testid= {`${genre === option.name && "active-genre"}`}
                         onClick={() => genreHandleClick(option)}>
                             {option.name}
                     </li>
