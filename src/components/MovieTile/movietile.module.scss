@@ -4,6 +4,9 @@
     background-color: #232323;
     cursor: pointer;
     position: relative;
+    a {
+        text-decoration: none
+    }
     &__options {
         position: absolute;
         top: 15px;
@@ -38,12 +41,8 @@
                     line-height: 22px;
                     font-family: Montserrat;
                 }
-                span:last-child {
-                    font-size: 14px;
-                }
             }
             &__genres {
-                font-size: 18px;
                 font-weight: 500;
                 color: aliceblue;
                 font-family: Montserrat;

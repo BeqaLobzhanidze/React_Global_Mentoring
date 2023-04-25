@@ -11,13 +11,13 @@ const options = [
   ]
 
 const initialValue = {
-    imgURL: '',
-    movieName: '',
-    releaseYear: '',
+    poster_path: '',
+    title: '',
+    release_date: '',
     genres: [],
-    rating: '',
-    duration: '',
-    description: ``
+    vote_average: '',
+    runtime: '',
+    overview: ``
   }
 
 export default function MovieForm({movieInfo , callback , onClose}) {
@@ -46,8 +46,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 type='text'
                                 id='title'
                                 name='title'
-                                value={formValues.movieName}
-                                onChange={ e => setFormValues({...formValues , movieName : e.target.value}) }
+                                value={formValues.title}
+                                onChange={ e => setFormValues({...formValues , title : e.target.value}) }
                             />
                     </div>
                     <div>
@@ -57,8 +57,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 id='url'
                                 name='url'
                                 placeholder='htpps://'
-                                value={formValues.imgURL}
-                                onChange={ e => setFormValues({...formValues , imgURL : e.target.value}) }
+                                value={formValues.poster_path}
+                                onChange={ e => setFormValues({...formValues , poster_path : e.target.value}) }
                             />
                     </div>
                     <div>
@@ -79,8 +79,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 type='date'
                                 id='date'
                                 name='date'
-                                value={formValues.releaseYear}
-                                onChange={ e => setFormValues({...formValues , releaseYear : e.target.value}) }
+                                value={formValues.release_date}
+                                onChange={ e => setFormValues({...formValues , release_date : e.target.value}) }
                             />
                     </div>
                     <div>
@@ -89,8 +89,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 type='number'
                                 id='rating'
                                 name='rating'
-                                value={formValues.rating}
-                                onChange={ e => setFormValues({...formValues , rating : e.target.value}) }
+                                value={formValues.vote_average}
+                                onChange={ e => setFormValues({...formValues , vote_average : e.target.value}) }
                             />
                     </div>
                     <div>
@@ -100,8 +100,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 id='runtime'
                                 name='runtime'
                                 placeholder='runtime'
-                                value={formValues.duration}
-                                onChange={ e => setFormValues({...formValues , duration : e.target.value}) }
+                                value={formValues.runtime}
+                                onChange={ e => setFormValues({...formValues , runtime : e.target.value}) }
                             />
                     </div>
                 </aside>
@@ -112,8 +112,8 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                         id='description'
                         placeholder='Movie Description'
                         name='description'
-                        value={formValues.description}
-                        onChange={ e => setFormValues({...formValues , description : e.target.value}) }
+                        value={formValues.overview}
+                        onChange={ e => setFormValues({...formValues , overview : e.target.value}) }
                     />
             </div>
             <div className={styles.container__buttons}>
