@@ -24,5 +24,6 @@ describe('MovieForm Component Related test cases' , function() {
         const submitBtn = screen.getByText('SUBMIT');
         fireEvent.click(submitBtn);
         expect(mockCallback).toHaveBeenCalled();
+
     })
 })
