@@ -3,6 +3,7 @@ import styles from './movieform.module.scss';
 import Select from 'react-select';
 import React from 'react';
 import { useFormik } from 'formik';
+import axios from 'axios';
 
 const options = [
     { value: 'Crime', label: 'Crime' },
@@ -22,6 +23,21 @@ const initialValue = {
   }
 
 export default function MovieForm({movieInfo}) {
+
+    const [body , setBody] = React.useState('');
+
+    React.useEffect(() => {
+
+        if(!body) return;
+
+        axios.post('http://localhost:4000/movies', body)
+        .then(response => {
+            window.location.href = '/' + response.data.id;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }, [body])
 
     const validate = values => {
         const errors = {};
@@ -57,7 +73,7 @@ export default function MovieForm({movieInfo}) {
         initialValues: movieInfo || initialValue,
         validate,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            setBody(values);
         },
       });
 
@@ -132,7 +148,7 @@ export default function MovieForm({movieInfo}) {
                     <div>
                         <label htmlFor='runtime'>RUNTIME</label>
                         <input
-                                type='text'
+                                type='number'
                                 id='runtime'
                                 name='runtime'
                                 placeholder='runtime'
