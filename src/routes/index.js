@@ -4,6 +4,8 @@ import HeaderSearch from "../components/HeaderSearch";
 import MovieDetails from "../components/MovieDetails";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import Dialog from "../components/Dialog";
+import MovieForm from "../components/MovieForm";
 
 
 export default function PageRoutes() {
@@ -14,7 +16,9 @@ export default function PageRoutes() {
     return (
         <Routes>
           <Route path="/" element={<MovieListPage searchQuery={searchQuery}/>}>
-            <Route path="/" element={<HeaderSearch setQuery={setSearchQuery}/>} />
+            <Route path="/" element={<HeaderSearch setQuery={setSearchQuery}/>}>
+              <Route path="/new" element={<Dialog title='add movie' isOpen='true'><MovieForm /></Dialog>}/>
+            </Route>
             <Route path=":movieID" element={<MovieDetails />} />
           </Route>
         </Routes>

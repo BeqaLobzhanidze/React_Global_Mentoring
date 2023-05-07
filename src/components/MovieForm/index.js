@@ -2,6 +2,7 @@ import Button from '../Button';
 import styles from './movieform.module.scss';
 import Select from 'react-select';
 import React from 'react';
+import { useFormik } from 'formik';
 
 const options = [
     { value: 'Crime', label: 'Crime' },
@@ -20,24 +21,48 @@ const initialValue = {
     overview: ``
   }
 
-export default function MovieForm({movieInfo , callback , onClose}) {
+export default function MovieForm({movieInfo}) {
 
-    const [formValues , setFormValues] = React.useState(movieInfo || initialValue)
+    const validate = values => {
+        const errors = {};
+        if (!values.poster_path) {
+          errors.poster_path = 'Required';
+        } else if (values.poster_path.length > 100) {
+          errors.poster_path = 'Must be 100 characters or less';
+        }
 
-    const [multiSelectValue , setMultiSelectValue] = React.useState('');
+        if (!values.release_date) {
+          errors.release_date = 'Required';
+        } else if(values.release_date < Date.now()) {
+          errors.release_date = 'release date must be less than today'
+        }
 
-    function submitHandler(e) {
-        e.preventDefault();
-        callback(Object.fromEntries(new FormData(e.target)));
-        onClose();
-    }
+        if (!values.title) {
+          errors.title = 'Required';
+        }
 
-    function multiSelectChange(option) {
-        setMultiSelectValue(option);
-    }
+        if(!values.vote_average) {
+            errors.vote_average = 'Required';
+        } else if(values.vote_average > 10) {
+            errors.vote_average = 'vote average should be less than 10'
+        }
+
+        if(!values.overview) {
+            errors.overview = 'Required';
+        }
+        return errors;
+      };
+
+    const formik = useFormik({
+        initialValues: movieInfo || initialValue,
+        validate,
+        onSubmit: (values) => {
+            alert(JSON.stringify(values, null, 2));
+        },
+      });
 
     return (
-        <form className={styles.container} data-testid='form' onSubmit={submitHandler}>
+        <form className={styles.container} data-testid='form' onSubmit={formik.handleSubmit}>
             <div className={styles.container__main}>
                 <aside className={styles.container__main__leftSide}>
                     <div>
@@ -46,52 +71,63 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 type='text'
                                 id='title'
                                 name='title'
-                                value={formValues.title}
-                                onChange={ e => setFormValues({...formValues , title : e.target.value}) }
+                                value={formik.values.title}
+                                onChange={formik.handleChange}
                             />
+                        {formik.errors.title ? <div style={{color: 'red'}}>{formik.errors.title}</div> : null}
                     </div>
                     <div>
-                        <label htmlFor='url'>MOVIE URL</label>
+                        <label htmlFor='poster_path'>MOVIE URL</label>
                         <input
                                 type='url'
-                                id='url'
-                                name='url'
-                                placeholder='htpps://'
-                                value={formValues.poster_path}
-                                onChange={ e => setFormValues({...formValues , poster_path : e.target.value}) }
+                                id='poster_path'
+                                name='poster_path'
+                                placeholder='https://'
+                                value={formik.values.poster_path}
+                                onChange={formik.handleChange}
                             />
+                        {formik.errors.poster_path ? <div style={{color: 'red'}}>{formik.errors.poster_path}</div> : null}
                     </div>
                     <div>
-                        <label htmlFor='genre'>Genre</label>
-                        <input style={{'display' : 'none'}} name='genre' value={JSON.stringify(multiSelectValue)} onChange={()=> {}}/>
+                        <label htmlFor='genres'>Genre</label>
                         <Select
                                 isMulti
                                 options={options}
+                                name='genres'
+                                id='genres'
                                 className={styles.container__main__leftSide__customSelect} 
-                                onChange={multiSelectChange}
+                                onChange={(selectedOptions) => {
+                                    formik.setFieldValue(
+                                      "genres",
+                                      selectedOptions.map((option) => option.value)
+                                    );
+                                  }}
+                                  value={options.filter((option) => formik.values.genres.includes(option.value))}
                             />
                     </div>
                 </aside>
                 <aside className={styles.container__main__rightSide}>
                     <div>
-                        <label htmlFor='date'>RELEASE DATE</label>
+                        <label htmlFor='release_date'>RELEASE DATE</label>
                         <input
                                 type='date'
-                                id='date'
-                                name='date'
-                                value={formValues.release_date}
-                                onChange={ e => setFormValues({...formValues , release_date : e.target.value}) }
+                                id='release_date'
+                                name='release_date'
+                                value={formik.values.release_date}
+                                onChange={formik.handleChange}
                             />
+                        {formik.errors.release_date ? <div style={{color: 'red'}}>{formik.errors.release_date}</div> : null}
                     </div>
                     <div>
-                        <label htmlFor='rating'>RATING</label>
+                        <label htmlFor='vote_average'>RATING</label>
                         <input
                                 type='number'
-                                id='rating'
-                                name='rating'
-                                value={formValues.vote_average}
-                                onChange={ e => setFormValues({...formValues , vote_average : e.target.value}) }
+                                id='vote_average'
+                                name='vote_average'
+                                value={formik.values.vote_average}
+                                onChange={formik.handleChange}
                             />
+                        {formik.errors.vote_average ? <div style={{color: 'red'}}>{formik.errors.vote_average}</div> : null}
                     </div>
                     <div>
                         <label htmlFor='runtime'>RUNTIME</label>
@@ -100,21 +136,22 @@ export default function MovieForm({movieInfo , callback , onClose}) {
                                 id='runtime'
                                 name='runtime'
                                 placeholder='runtime'
-                                value={formValues.runtime}
-                                onChange={ e => setFormValues({...formValues , runtime : e.target.value}) }
+                                value={formik.values.runtime}
+                                onChange={formik.handleChange}
                             />
                     </div>
                 </aside>
             </div>
             <div className={styles.container__overview}>
-                <label htmlFor='description'>OVERVIEW</label>
+                <label htmlFor='overview'>OVERVIEW</label>
                 <textarea
-                        id='description'
+                        id='overview'
                         placeholder='Movie Description'
-                        name='description'
-                        value={formValues.overview}
-                        onChange={ e => setFormValues({...formValues , overview : e.target.value}) }
+                        name='overview'
+                        value={formik.values.overview}
+                        onChange={formik.handleChange}
                     />
+                {formik.errors.overview ? <div style={{color: 'red'}}>{formik.errors.overview}</div> : null}
             </div>
             <div className={styles.container__buttons}>
                 <Button btnClass='secondary' text='RESET'/>
