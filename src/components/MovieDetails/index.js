@@ -1,35 +1,69 @@
+// import styling
 import styles from './moviedetails.module.scss';
+
+// import packages
 import React from 'react';
-import SeparatorBetweenGenres from '../MovieTile/utills/separator';
+import { BsSearch } from 'react-icons/bs';
+import { useParams , Link , useLocation, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
-export default function MovieDetails({ movieDetailInfo }) {
+//import assets and utils
+import { SeparatorBetweenGenres , Duration } from '../MovieTile/utills/separator';
+import netflix from '../../assets/netflixroulette copy.png';
+import Poster from '../Poster';
 
-    const {imgURL , movieName , releaseYear , genres , rating , duration , description} = movieDetailInfo;
-    const separator = SeparatorBetweenGenres(genres);
+export default function MovieDetails() {
+
+    const { movieID } = useParams();
+    const [movieDetailInfo , setMovieDetailInfo] = React.useState(null);
+    const separator = movieDetailInfo && SeparatorBetweenGenres(movieDetailInfo.genres);
+    const location = useLocation();
+    
+    React.useEffect(() => {
+        axios.get(`http://localhost:4000/movies/${movieID}`).then(data => setMovieDetailInfo(data.data))
+    }, [movieID])
 
     return (
-        <section className={styles.container} aria-label='movie description'>
-            <figure>
-                <img src={imgURL} alt="movieTile"/>
-            </figure>
-            <div className={styles.container__rightSide}>
-                <div className={styles.container__rightSide__title}>
-                    <h2>{movieName}</h2>
-                    <span>{rating}</span>
+        <>
+            {movieDetailInfo ? <section className={styles.container} aria-label='movie description'>
+            <div className={styles.container__header}>
+                <figure>
+                    <img src={netflix} alt='netflix'/>
+                </figure>
+                <div>
+                    <Link to={{
+                        pathname: `/`,
+                        search: location.search
+                    }}>
+                        <BsSearch size={25} color='white'/>
+                    </Link>
                 </div>
-                <p className={styles.container__rightSide__genres}>
-                    {genres.map((item , i , list) =>
-                        <React.Fragment key={item}>
-                            {i + 1 !== list.length ? <span>{item}{separator}</span> : <span>{item}</span>}
-                        </React.Fragment>
-                    )}
-                </p>
-                <div className={styles.container__rightSide__overallinfo}>
-                    <span>{releaseYear}</span>
-                    <span>{duration}</span>
-                </div>
-                <p className={styles.container__rightSide__description}>{description}</p>
             </div>
-        </section>
+            <div className={styles.container__details}>
+                <figure>
+                    <Poster src={movieDetailInfo.poster_path}/>
+                </figure>
+                <div className={styles.container__details__rightSide}>
+                    <div className={styles.container__details__rightSide__title}>
+                        <h2 data-testid='moviedetail_title'>{movieDetailInfo.title}</h2>
+                        <span>{movieDetailInfo.vote_average}</span>
+                    </div>
+                    <p className={styles.container__details__rightSide__genres}>
+                        {movieDetailInfo.genres.map((item , i , list) =>
+                            <React.Fragment key={item}>
+                                {i + 1 !== list.length ? <span>{item}{separator}</span> : <span>{item}</span>}
+                            </React.Fragment>
+                        )}
+                    </p>
+                    <div className={styles.container__details__rightSide__overallinfo}>
+                        <span>{movieDetailInfo.release_date.substring(0,4)}</span>
+                        <span>{Duration(movieDetailInfo.runtime)}</span>
+                    </div>
+                    <p className={styles.container__details__rightSide__description}>{movieDetailInfo.overview}</p>
+                </div>
+            </div>
+            <Outlet />
+        </section> : <> Loading ...</>}
+    </>
     )
 }

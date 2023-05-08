@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import styles from './dialog.module.scss';
 import FocusTrap from "focus-trap-react";
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { Link } from "react-router-dom";
 
 const Dialog = ({title, isOpen, children , onClose}) => {
 
@@ -14,7 +15,7 @@ const Dialog = ({title, isOpen, children , onClose}) => {
             <div className={styles.container__dialog}>
               <h2>{title}</h2>
               <div data-testid='closeModal' className={styles.container__dialog__close} onClick={onClose}>
-                <AiFillCloseCircle color='white' size={30}/>
+                <Link to='/'><AiFillCloseCircle color='white' size={30}/></Link>
               </div>
               {children}
             </div>

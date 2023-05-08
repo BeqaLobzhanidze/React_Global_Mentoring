@@ -5,18 +5,14 @@ import React from 'react'
 //import styling
 import styles from './options.module.scss'
 import Dialog from '../Dialog'
-import MovieForm from '../MovieForm'
-
-import constants from '../../utils/constants'
 import DeleteBlock from '../DeleteBlock'
+import { Link } from 'react-router-dom'
 
-export default function Options({toggleOptionsWithPropagation}) {
-    const [isOpen , setIsOpen] = React.useState(false);
+export default function Options({toggleOptionsWithPropagation , id}) {
     const [isOpenDelete , setIsOpenDelete] = React.useState(false);
 
     function EditHandleClick(e) {
         e.stopPropagation();
-        setIsOpen(true)
     }
 
     function DeleteHandleClick(e) {
@@ -30,13 +26,11 @@ export default function Options({toggleOptionsWithPropagation}) {
                 <AiFillCloseCircle onClick={(e) => toggleOptionsWithPropagation(e)}/>
             </div>
             <div className={styles.container__buttons} onClick={(e) => toggleOptionsWithPropagation(e)}>
-                <button onClick={(e) => EditHandleClick(e)}>Edit</button>
+                <Link to={`${id}/edit`}>
+                    <button onClick={(e) => EditHandleClick(e)}>Edit</button>
+                </Link>
                 <button onClick={(e) => DeleteHandleClick(e)}>Delete</button>
             </div>
-            {console.log(isOpen)}
-            <Dialog title='edit movie' isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <MovieForm movieInfo={constants.MovieDetailINFO} callback={data=> console.log(data)} onClose={() => setIsOpen(false)}/>
-            </Dialog>
             <Dialog title='delete movie' isOpen={isOpenDelete} onClose={() => setIsOpenDelete(false)}>
                 <DeleteBlock />
             </Dialog>

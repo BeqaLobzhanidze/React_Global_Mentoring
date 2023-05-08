@@ -11,10 +11,10 @@ describe('MovieForm Component Related test cases' , function() {
 
     it('if we are rendering prefilled movieform while we are passing prop movieInfo' , function() {
         render(<MovieForm movieInfo={constants.MovieDetailINFO}/>);
-        expect(screen.getByDisplayValue(constants.MovieDetailINFO.imgURL)).toBeInTheDocument()
-        expect(screen.getByDisplayValue(constants.MovieDetailINFO.duration)).toBeInTheDocument()
-        expect(screen.getByDisplayValue(constants.MovieDetailINFO.rating)).toBeInTheDocument()
-        expect(screen.getByDisplayValue(constants.MovieDetailINFO.movieName)).toBeInTheDocument()
+        expect(screen.getByDisplayValue(constants.MovieDetailINFO.poster_path)).toBeInTheDocument()
+        expect(screen.getByDisplayValue(constants.MovieDetailINFO.runtime)).toBeInTheDocument()
+        expect(screen.getByDisplayValue(constants.MovieDetailINFO.vote_average)).toBeInTheDocument()
+        expect(screen.getByDisplayValue(constants.MovieDetailINFO.title)).toBeInTheDocument()
     })
 
     it('if we are calling callback props' , function() {
@@ -24,5 +24,6 @@ describe('MovieForm Component Related test cases' , function() {
         const submitBtn = screen.getByText('SUBMIT');
         fireEvent.click(submitBtn);
         expect(mockCallback).toHaveBeenCalled();
+
     })
 })
