@@ -12,7 +12,8 @@ const options = [
     { value: 'Horror', label: 'Horror' },
     { value: 'Comedy', label: 'Comedy' },
     { value: 'Drama', label: 'Drama' },
-    { value: 'Romance', label: 'Romance' }
+    { value: 'Romance', label: 'Romance' },
+    { value: 'Music', label: 'Music' }
   ]
 
 const initialValue = {
@@ -89,7 +90,7 @@ export default function MovieForm() {
         initialValues: initialValue,
         validate,
         onSubmit: (values) => {
-            setBody(values);
+            setBody({...values , tagline: "randomTextToAvoidAxiosError"});
         },
       });
 
@@ -103,6 +104,7 @@ export default function MovieForm() {
                                 type='text'
                                 id='title'
                                 name='title'
+                                data-testid='title'
                                 value={formik.values.title}
                                 onChange={formik.handleChange}
                             />
@@ -115,6 +117,7 @@ export default function MovieForm() {
                                 id='poster_path'
                                 name='poster_path'
                                 placeholder='https://'
+                                data-testid='poster_path'
                                 value={formik.values.poster_path}
                                 onChange={formik.handleChange}
                             />
@@ -145,6 +148,7 @@ export default function MovieForm() {
                                 type='date'
                                 id='release_date'
                                 name='release_date'
+                                data-testid='release_date'
                                 value={formik.values.release_date}
                                 onChange={formik.handleChange}
                             />
@@ -156,6 +160,7 @@ export default function MovieForm() {
                                 type='number'
                                 id='vote_average'
                                 name='vote_average'
+                                data-testid='vote_average'
                                 value={formik.values.vote_average}
                                 onChange={formik.handleChange}
                             />
@@ -168,6 +173,7 @@ export default function MovieForm() {
                                 id='runtime'
                                 name='runtime'
                                 placeholder='runtime'
+                                data-testid='runtime'
                                 value={formik.values.runtime}
                                 onChange={formik.handleChange}
                             />
@@ -180,14 +186,15 @@ export default function MovieForm() {
                         id='overview'
                         placeholder='Movie Description'
                         name='overview'
+                        data-testid='overview'
                         value={formik.values.overview}
                         onChange={formik.handleChange}
                     />
-                {formik.errors.overview ? <div style={{color: 'red'}}>{formik.errors.overview}</div> : null}
+                {formik.errors.overview ? <div style={{color: 'red'}} data-testid='error'>{formik.errors.overview}</div> : null}
             </div>
             <div className={styles.container__buttons}>
                 <Button btnClass='secondary' text='RESET' onClick={() => formik.resetForm()}/>
-                <Button type='submit' btnClass='primary' text='SUBMIT'/>
+                <Button type='submit' btnClass='primary' text='SUBMIT' data-testid='form-submit'/>
             </div>
         </form>
     )

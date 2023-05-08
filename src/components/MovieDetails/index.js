@@ -45,7 +45,7 @@ export default function MovieDetails() {
                 </figure>
                 <div className={styles.container__details__rightSide}>
                     <div className={styles.container__details__rightSide__title}>
-                        <h2>{movieDetailInfo.title}</h2>
+                        <h2 data-testid='moviedetail_title'>{movieDetailInfo.title}</h2>
                         <span>{movieDetailInfo.vote_average}</span>
                     </div>
                     <p className={styles.container__details__rightSide__genres}>
