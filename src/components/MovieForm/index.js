@@ -4,12 +4,15 @@ import Select from 'react-select';
 import React from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const options = [
     { value: 'Crime', label: 'Crime' },
     { value: 'Documentary', label: 'Documentary' },
     { value: 'Horror', label: 'Horror' },
-    { value: 'Comedy', label: 'Comedy' }
+    { value: 'Comedy', label: 'Comedy' },
+    { value: 'Drama', label: 'Drama' },
+    { value: 'Romance', label: 'Romance' }
   ]
 
 const initialValue = {
@@ -22,21 +25,34 @@ const initialValue = {
     overview: ``
   }
 
-export default function MovieForm({movieInfo}) {
+export default function MovieForm() {
 
     const [body , setBody] = React.useState('');
+    const { movieID } = useParams();
+
+    React.useEffect(() => {
+        if(!movieID) return;
+
+        axios.get(`http://localhost:4000/movies/${movieID}`)
+                .then(data => {
+                    formik.setValues(data.data);
+                });
+    }, [movieID])
 
     React.useEffect(() => {
 
         if(!body) return;
 
-        axios.post('http://localhost:4000/movies', body)
-        .then(response => {
-            window.location.href = '/' + response.data.id;
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        const requestMethod = movieID ? axios.put : axios.post;
+
+        requestMethod('http://localhost:4000/movies', body)
+            .then(response => {
+                window.location.href = '/' + response.data.id;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
     }, [body])
 
     const validate = values => {
@@ -70,7 +86,7 @@ export default function MovieForm({movieInfo}) {
       };
 
     const formik = useFormik({
-        initialValues: movieInfo || initialValue,
+        initialValues: initialValue,
         validate,
         onSubmit: (values) => {
             setBody(values);
@@ -118,7 +134,7 @@ export default function MovieForm({movieInfo}) {
                                       selectedOptions.map((option) => option.value)
                                     );
                                   }}
-                                  value={options.filter((option) => formik.values.genres.includes(option.value))}
+                                value={options.filter((option) => formik.values.genres.includes(option.value))}
                             />
                     </div>
                 </aside>
@@ -170,7 +186,7 @@ export default function MovieForm({movieInfo}) {
                 {formik.errors.overview ? <div style={{color: 'red'}}>{formik.errors.overview}</div> : null}
             </div>
             <div className={styles.container__buttons}>
-                <Button btnClass='secondary' text='RESET'/>
+                <Button btnClass='secondary' text='RESET' onClick={() => formik.resetForm()}/>
                 <Button type='submit' btnClass='primary' text='SUBMIT'/>
             </div>
         </form>

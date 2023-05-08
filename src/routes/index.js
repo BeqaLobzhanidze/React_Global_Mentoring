@@ -19,7 +19,9 @@ export default function PageRoutes() {
             <Route path="/" element={<HeaderSearch setQuery={setSearchQuery}/>}>
               <Route path="/new" element={<Dialog title='add movie' isOpen='true'><MovieForm /></Dialog>}/>
             </Route>
-            <Route path=":movieID" element={<MovieDetails />} />
+            <Route path="/:movieID" element={<MovieDetails />}>
+              <Route path="edit" element={<Dialog title='edit movie' isOpen='true'><MovieForm /></Dialog>}/>
+            </Route>
           </Route>
         </Routes>
       );

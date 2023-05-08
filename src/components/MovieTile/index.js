@@ -27,7 +27,7 @@ export default function MovieTile({movieInfo}) {
             <div className={styles.container__icon} onClick={e => toggleOptionsWithPropagation(e)}>
                 <BsThreeDotsVertical />
             </div>
-            {showOptions && <div className={styles.container__options}><Options toggleOptionsWithPropagation={toggleOptionsWithPropagation}/></div>}
+            {showOptions && <div className={styles.container__options}><Options toggleOptionsWithPropagation={toggleOptionsWithPropagation} id={id}/></div>}
             <figure className={styles.container__figure}>
                 <Poster src={poster_path}/>
                 <figcaption className={styles.container__figure__figcaption}>

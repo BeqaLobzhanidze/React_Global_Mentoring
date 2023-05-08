@@ -4,7 +4,7 @@ import styles from './moviedetails.module.scss';
 // import packages
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { useParams , Link , useLocation } from 'react-router-dom';
+import { useParams , Link , useLocation, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 //import assets and utils
@@ -62,6 +62,7 @@ export default function MovieDetails() {
                     <p className={styles.container__details__rightSide__description}>{movieDetailInfo.overview}</p>
                 </div>
             </div>
+            <Outlet />
         </section> : <> Loading ...</>}
     </>
     )
