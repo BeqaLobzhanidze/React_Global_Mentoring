@@ -1,23 +1,22 @@
 // import packages
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
+// import { useSearchParams } from 'react-router-dom';
 
 //import styling
 import styles from './genreselect.module.scss';
 
 export default function GenreSelect({genres , selectedGenre , onSelect}) {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [genre , setGenre] = React.useState(searchParams.get('genre')?.toUpperCase() || selectedGenre || 'ALL');
+    const { query , push } = useRouter();
+    const [genre , setGenre] = React.useState(query.genre?.toUpperCase() || selectedGenre || 'ALL');
 
     function genreHandleClick(option) {
         onSelect(option.name);
         setGenre(option.name);
-        const existingParams = Object.fromEntries(searchParams.entries());
-        const newParams = { genre : option.name === "ALL" ? "" : option.name };
-        const mergedParams = { ...existingParams, ...newParams };
-        setSearchParams(new URLSearchParams(mergedParams));
+        push({ query: { ...(query || {}), genre: option.name } });
     }
+
     return (
         <div className={styles.container}>
             <ul className={styles.container__list}>

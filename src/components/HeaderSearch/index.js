@@ -10,24 +10,25 @@ import netflix from '../../assets/netflixroulette copy.png';
 
 //import packages
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import Image from "next/image";
+// import { Link, Outlet } from "react-router-dom";
 
-export default function HeaderSearch({setQuery}) {
+export default function HeaderSearch() {
     return (
         <div className={styles.container}>
             <div className={styles.container__header}>
                 <figure>
-                    <img src={netflix} alt='netflix'/>
+                    <Image src={netflix} alt='netflix'/>
                 </figure>
-                <Link to='/new'>
+                {/* <Link to='/new'> */}
                     <Button text='+ ADD MOVIE' btnClass='addmovie'/>
-                </Link>
+                {/* </Link> */}
             </div>
             <div className={styles.container__body}>
                 <h1 className={styles.container__body__title}>FIND YOUR MOVIE</h1>
-                <SearchForm initialSearchQuery="test" onSearch={data => setQuery(data)}/>
+                <SearchForm initialSearchQuery="test" />
             </div>
-            <Outlet />
+            {/* <Outlet /> */}
         </div>
     )
 }

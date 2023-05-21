@@ -1,10 +1,10 @@
-import defaultPoster from "../../assets/poster.jpg";
+import React from "react";
+import Image from "next/image";
+import Images from "../../assets";
 
 export default function Poster({ src }) {
-    function handleError(event) {
-        event.target.src = defaultPoster;
-    }
+    const [imageSource, setImageSource] = React.useState(src || Images.Poster);
     return (
-        <img src = {src ? src : defaultPoster } alt="poster of image" onError={handleError}/>
+        <Image width={600} height={600} src = {imageSource}  alt="poster of image" onError={() => setImageSource(Images.Poster)}/>
     )
 }

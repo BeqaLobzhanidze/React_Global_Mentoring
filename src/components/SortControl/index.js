@@ -1,21 +1,16 @@
 import styles from './sortcontrol.module.scss';
 import React from 'react';
 import constants from '../../utils/constants';
-import { getSortControlValue } from '../MovieTile/utills/separator';
-import { useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
-export default function SortControl({currentSelectProps , onSortBy}) {
+export default function SortControl({currentSelectProps}) {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [currentSelect , setCurrentSelect] = React.useState(searchParams.get('sortBy')?.toUpperCase() || currentSelectProps || 'RELEASE DATE');
+    const { query , push } = useRouter();
+    const [currentSelect , setCurrentSelect] = React.useState(query.sortBy?.toUpperCase() || currentSelectProps || 'RELEASE DATE');
 
     function selectSortBy(e) {
         setCurrentSelect(e.target.value);
-        onSortBy(getSortControlValue(e.target.value));
-        const existingParams = Object.fromEntries(searchParams.entries());
-        const newParams = { sortBy: getSortControlValue(e.target.value) };
-        const mergedParams = { ...existingParams, ...newParams };
-        setSearchParams(new URLSearchParams(mergedParams));
+        push({ query: { ...(query || {}), sortBy: e.target.value } });
     }
     return (
         <div className={styles.container}>

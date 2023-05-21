@@ -11,6 +11,7 @@ import axios from 'axios';
 import { SeparatorBetweenGenres , Duration } from '../MovieTile/utills/separator';
 import netflix from '../../assets/netflixroulette copy.png';
 import Poster from '../Poster';
+import siteImages from '../../assets';
 
 export default function MovieDetails() {
 
@@ -28,7 +29,7 @@ export default function MovieDetails() {
             {movieDetailInfo ? <section className={styles.container} aria-label='movie description'>
             <div className={styles.container__header}>
                 <figure>
-                    <img src={netflix} alt='netflix'/>
+                    <img width={300} height={300} src={siteImages.Netflix} alt='netflix'/>
                 </figure>
                 <div>
                     <Link to={{

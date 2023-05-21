@@ -1,5 +1,6 @@
 // import styling
 import styles from './button.module.scss';
+import React from 'react';
 
 export default function Button({btnClass, text , ...props}) {
     return (
