@@ -1,9 +1,13 @@
 import React from "react";
-import MovieListPage from '../components/MovieListPage'
+import MovieListPage from '../components/MovieListPage';
+import HeaderSearch from "../components/HeaderSearch";
 import axios from "axios";
 
 export default function Page({movies}) {
-    return <h1><MovieListPage movies={movies}/></h1>;
+    return <>
+              <HeaderSearch />
+              <MovieListPage movies={movies}/>
+           </>;
   }
 
 

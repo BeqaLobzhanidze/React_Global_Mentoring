@@ -4,66 +4,54 @@ import styles from './moviedetails.module.scss';
 // import packages
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { useParams , Link , useLocation, Outlet } from 'react-router-dom';
-import axios from 'axios';
+import Link from 'next/link';
 
 //import assets and utils
 import { SeparatorBetweenGenres , Duration } from '../MovieTile/utills/separator';
-import netflix from '../../assets/netflixroulette copy.png';
 import Poster from '../Poster';
-import siteImages from '../../assets';
+import Images from '../../assets';
+import Image from 'next/image';
 
-export default function MovieDetails() {
+export default function MovieDetails({selectedMovie}) {
 
-    const { movieID } = useParams();
-    const [movieDetailInfo , setMovieDetailInfo] = React.useState(null);
-    const separator = movieDetailInfo && SeparatorBetweenGenres(movieDetailInfo.genres);
-    const location = useLocation();
-    
-    React.useEffect(() => {
-        axios.get(`http://localhost:4000/movies/${movieID}`).then(data => setMovieDetailInfo(data.data))
-    }, [movieID])
+    const separator = selectedMovie && SeparatorBetweenGenres(selectedMovie.genres);
 
     return (
         <>
-            {movieDetailInfo ? <section className={styles.container} aria-label='movie description'>
+            {selectedMovie ? <section className={styles.container} aria-label='movie description'>
             <div className={styles.container__header}>
                 <figure>
-                    <img width={300} height={300} src={siteImages.Netflix} alt='netflix'/>
+                    <Image width={0} height={0} src={Images.Netflix} alt='netflix'/>
                 </figure>
                 <div>
-                    <Link to={{
-                        pathname: `/`,
-                        search: location.search
-                    }}>
+                    <Link href='/'>
                         <BsSearch size={25} color='white'/>
                     </Link>
                 </div>
             </div>
             <div className={styles.container__details}>
                 <figure>
-                    <Poster src={movieDetailInfo.poster_path}/>
+                    <Poster src={selectedMovie.poster_path}/>
                 </figure>
                 <div className={styles.container__details__rightSide}>
                     <div className={styles.container__details__rightSide__title}>
-                        <h2 data-testid='moviedetail_title'>{movieDetailInfo.title}</h2>
-                        <span>{movieDetailInfo.vote_average}</span>
+                        <h2 data-testid='moviedetail_title'>{selectedMovie.title}</h2>
+                        <span>{selectedMovie.vote_average}</span>
                     </div>
                     <p className={styles.container__details__rightSide__genres}>
-                        {movieDetailInfo.genres.map((item , i , list) =>
+                        {selectedMovie.genres.map((item , i , list) =>
                             <React.Fragment key={item}>
                                 {i + 1 !== list.length ? <span>{item}{separator}</span> : <span>{item}</span>}
                             </React.Fragment>
                         )}
                     </p>
                     <div className={styles.container__details__rightSide__overallinfo}>
-                        <span>{movieDetailInfo.release_date.substring(0,4)}</span>
-                        <span>{Duration(movieDetailInfo.runtime)}</span>
+                        <span>{selectedMovie.release_date.substring(0,4)}</span>
+                        <span>{Duration(selectedMovie.runtime)}</span>
                     </div>
-                    <p className={styles.container__details__rightSide__description}>{movieDetailInfo.overview}</p>
+                    <p className={styles.container__details__rightSide__description}>{selectedMovie.overview}</p>
                 </div>
             </div>
-            <Outlet />
         </section> : <> Loading ...</>}
     </>
     )

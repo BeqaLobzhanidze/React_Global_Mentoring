@@ -19,7 +19,6 @@ export default function MovieListPage({movies}) {
     const [activeGenre, setActiveGenre] = useState(query.genre || 'ALL');
     return (
         <>
-            <HeaderSearch />
             <div className='search'>
                 <GenreSelect genres={constants.Genres} selectedGenre={activeGenre} onSelect={setActiveGenre} />
                 <SortControl currentSelectProps='TITLE'/>
