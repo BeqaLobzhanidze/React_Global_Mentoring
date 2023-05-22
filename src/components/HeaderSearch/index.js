@@ -1,29 +1,34 @@
+// import components
 import Button from "../Button";
 import SearchForm from "../SearchForm";
+
+//import styling
 import styles from './headersearch.module.scss';
+
+//import assets
 import netflix from '../../assets/netflixroulette copy.png';
-import Dialog from "../Dialog";
+
+//import packages
 import React from "react";
-import MovieForm from "../MovieForm";
+import Image from "next/image";
+// import { Link, Outlet } from "react-router-dom";
 
-export default function HeaderSearch({setQuery}) {
-    const [isOpen , setIsOpen] = React.useState(false)
-
+export default function HeaderSearch() {
     return (
         <div className={styles.container}>
             <div className={styles.container__header}>
                 <figure>
-                    <img src={netflix} alt='netflix'/>
+                    <Image src={netflix} alt='netflix'/>
                 </figure>
-                <Button text='+ ADD MOVIE' btnClass='addmovie' onClick={() => setIsOpen(true)}/>
+                {/* <Link to='/new'> */}
+                    <Button text='+ ADD MOVIE' btnClass='addmovie'/>
+                {/* </Link> */}
             </div>
             <div className={styles.container__body}>
                 <h1 className={styles.container__body__title}>FIND YOUR MOVIE</h1>
-                <SearchForm initialSearchQuery='asdad' onSearch={data => setQuery(data)}/>
+                <SearchForm initialSearchQuery="test" />
             </div>
-            <Dialog title='add movie' isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <MovieForm callback={data=> console.log(data)} onClose={() => setIsOpen(false)}/>
-            </Dialog>
+            {/* <Outlet /> */}
         </div>
     )
 }

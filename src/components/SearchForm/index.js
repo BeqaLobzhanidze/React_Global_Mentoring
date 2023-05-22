@@ -1,5 +1,6 @@
 // import packages
 import React from 'react';
+import { useRouter } from 'next/router';
 
 // import components
 import Button from '../Button';
@@ -7,13 +8,18 @@ import Button from '../Button';
 // import styling
 import styles from './searchform.module.scss';
 
-export default function SearchForm({initialSearchQuery , onSearch}) {
+export default function SearchForm({initialSearchQuery}) {
 
-    const [searchQuery , setSearchQuery] = React.useState(initialSearchQuery || '');
+    const { push , query } = useRouter();
+    const [searchQuery , setSearchQuery] = React.useState( query.query || initialSearchQuery || '');
+
+    function setUrl() {
+        push({ query: { ...(query || {}), query: searchQuery } });
+    }
 
     function handleKeyDownEnter(e) {
         if (e.key === "Enter") {
-            onSearch(searchQuery);
+            setUrl();
           }
     }
 
@@ -26,10 +32,14 @@ export default function SearchForm({initialSearchQuery , onSearch}) {
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
                     onKeyDown={e => handleKeyDownEnter(e)}
-                    onFocus={() => onSearch(searchQuery)}
+                    onFocus={() => { 
+                        setUrl();
+                    }}
                 />
             </div>
-            <Button btnClass='primary' text='Search' onClick={() => onSearch(searchQuery)}/>
+            <Button btnClass='primary' text='Search' onClick={() => {
+                setUrl();
+            }}/>
         </div>
     )
 }
